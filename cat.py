@@ -14,8 +14,19 @@ class AppUI():
         self.label.grid(row=0, column=0, padx=5, pady=5)
         self.button.grid(row=1, column=0, padx=5, pady=5)
 
-# API url
-url = "https://cat-fact.herokuapp.com/facts/random"
+        self.master.mainloop()
 
-# Data retrieval
-data = requests.get(url).json()
+def gen_new_fact(master):
+    """ Generates random fact """
+    # API url
+    url = "https://cat-fact.herokuapp.com/facts/random"
+
+    # Data retrieval
+    data = requests.get(url).json()
+
+    # Display the data
+    display_label = Label(master, text=data['text']).grid(row=2, column=0, padx=5, pady=5)
+
+if __name__ == "__main__":
+    root = Tk()
+    ui = AppUI(root, lambda: gen_new_fact(root))
